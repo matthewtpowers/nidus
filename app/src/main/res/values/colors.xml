@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--There is an alpha channel on the card background -->
+    <color name="card_background">#66e0e0e0</color>
+    <color name="warning_red">#f36c60</color>
+    <color name="warning_red_stroke">#e84e40</color>
+    <color name="alert_red">#e51c23</color>
+    <color name="alert_red_stroke">#b0120a</color>
+    <color name="good_green">#a3e9a4</color>
+    <color name="good_green_stroke">#72d572</color>
+</resources>

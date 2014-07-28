@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- changeBounds is used for the TextViews which are shared -->
+        <changeBounds>
+            <!--
+                Set this transitions target IDs to be those which point to the TextViews in both the
+                starting and result Activities
+            -->
+            <targets>
+                <target android:targetId="@id/thermo_title" />
+                <target android:targetId="@id/thermo_title_details" />
+            </targets>
+        </changeBounds>
+
+</transitionSet>
