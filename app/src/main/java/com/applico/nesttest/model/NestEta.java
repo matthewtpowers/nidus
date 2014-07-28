@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by matthewpowers on 7/27/14.
  * Eta class is for the system to know when you are going to be home.
+ * This class should be used for scheduling trips
  */
 public class NestEta {
 
