@@ -14,7 +14,9 @@ import android.content.Intent;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Iterator;
 
+import com.applico.nesttest.model.NestStructure;
 import com.applico.nesttest.ui.NestAuthFragment;
 import com.applico.nesttest.ui.NestDeviceFragment;
 import com.applico.nesttest.ui.ThermostatFragment;
@@ -29,6 +31,10 @@ import retrofit.RestAdapter;
 import retrofit.client.Response;
 import retrofit.RetrofitError;
 
+import com.newrelic.agent.android.NewRelic;
+
+
+
 
 public class NestDriverActivity extends Activity implements Firebase.AuthListener, NestAuthFragment.OnFragmentInteractionListener, NestDeviceFragment.OnFragmentInteractionListener, Callback<NestToken> {
 
@@ -39,7 +45,7 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
     private SharedPreferences mSharedPref;
 
     private Firebase mFirebase;
-    private String mAuthToken;
+    private String mAccessToken;
 
     //https://home.nest.com/login/oauth2?client_id=2ed12941-0134-4e77-85f9-793896e44e24&state=0138
     //TVPLXJJM
@@ -57,53 +63,33 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nest_driver);
 
+        //Start NewRelic
+        NewRelic.withApplicationToken(GenericConstants.NEW_RELIC_AUTH_TOKEN).start(this);
+
         mSharedPref = getSharedPreferences(GenericConstants.NEST_SHARED_PREF_KEY, 0);
         mIsAuthorized = mSharedPref.getBoolean(GenericConstants.NEST_IS_AUTH, false);
+        mAccessToken = mSharedPref.getString(GenericConstants.NEST_ACCESS_TOKEN,"invalid_token");
 
         if(mIsAuthorized == false)
         {
-            Log.e(LOG_TAG,"Creating the Fragment");
-
+            Log.e(LOG_TAG,"Not Authorized");
             if (savedInstanceState == null) {
-                getFragmentManager().beginTransaction()
-                        .add(R.id.container, NestDeviceFragment.newInstance(null,null))
-                        .commit();
-            }
-
-            /*if (savedInstanceState == null) {
                 getFragmentManager().beginTransaction()
                         .add(R.id.container, NestAuthFragment.newInstance(null,null))
                         .commit();
-            }*/
+            }
         }
         else {
-
-            if (savedInstanceState == null) {
+            Log.e(LOG_TAG,"Authorized");
+            nestTestDriver();
+            /*if (savedInstanceState == null) {
                 getFragmentManager().beginTransaction()
                         .add(R.id.container, NestDeviceFragment.newInstance(null,null))
                         .commit();
-            }
+            }*/
 
-            /*
-            //Place holder for setting up the firebase code
-            mFirebase = new Firebase(GenericConstants.NEST_FIREBASE_URI);
-            mFirebase.auth(mAuthToken, new Firebase.AuthListener() {
 
-                @Override
-                public void onAuthError(FirebaseError firebaseError) {
-                    Log.e(LOG_TAG,"Auth Error: " + firebaseError.getMessage());
-                }
 
-                @Override
-                public void onAuthSuccess(Object o) {
-                    Log.e(LOG_TAG,"Auth Success: " + o.toString());
-                }
-
-                @Override
-                public void onAuthRevoked(FirebaseError firebaseError) {
-                    Log.e(LOG_TAG,"Auth Revoked: " + firebaseError.getMessage());
-                }
-            });*/
 
 
         }
@@ -180,12 +166,14 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
     public void success(NestToken t, Response response) {
         mSharedPref = getSharedPreferences(GenericConstants.NEST_SHARED_PREF_KEY, 0);
         SharedPreferences.Editor editor = mSharedPref.edit();
-        editor.putString(GenericConstants.NEST_AUTH_TOKEN, t.accessToken);
-        editor.putLong(GenericConstants.NEST_AUTH_TOKEN_EXPIRATION, t.expirationDate);
+        editor.putString(GenericConstants.NEST_ACCESS_TOKEN, t.accessToken);
+        editor.putLong(GenericConstants.NEST_ACCESS_TOKEN_EXPIRATION, t.expirationDate);
         editor.putBoolean(GenericConstants.NEST_IS_AUTH, true);
         editor.commit();
+        mAccessToken = t.accessToken;
         Log.e(LOG_TAG, "Access Token: " + t.accessToken);
         Log.e(LOG_TAG,"Expiration Date: " + t.expirationDate);
+        nestTestDriver();
     }
 
     @Override
@@ -214,6 +202,7 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
         INestService svc = restAdapter.create(INestService.class);
         Log.e(LOG_TAG,"About to call the service");
         svc.getToken(authMap,this);
+
         /**
          * {
          *  "access_token":"c.5z8rMYNQBcgQ2ln0RGeusBBPzoxEedJ8XMB4LUsG8J5AcM0LBDLUgIbklrisuBy5WxCf1O0rPXMtTQh57WJATQIi6lGMrlpLplbGsaB8cy74TmWZDHDEoB5VpV14WHBBQ1TUfa2AVBrylqOH",
@@ -231,8 +220,8 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
         mIsAuthorized = false;
         mSharedPref = getSharedPreferences(GenericConstants.NEST_SHARED_PREF_KEY, 0);
         SharedPreferences.Editor editor = mSharedPref.edit();
-        editor.putString(GenericConstants.NEST_AUTH_TOKEN,"");
-        editor.putLong(GenericConstants.NEST_AUTH_TOKEN_EXPIRATION, 0);
+        editor.putString(GenericConstants.NEST_ACCESS_TOKEN,"");
+        editor.putLong(GenericConstants.NEST_ACCESS_TOKEN_EXPIRATION, 0);
         editor.putBoolean(GenericConstants.NEST_IS_AUTH, false);
         editor.commit();
     }
@@ -253,4 +242,63 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
     public void Method(View view){
         Log.e(LOG_TAG,"Clicked");
     }
+
+    private void nestTestDriver()
+    {
+        Log.e(LOG_TAG,"Firebase URI: " + GenericConstants.NEST_FIREBASE_URI);
+        Log.e(LOG_TAG,"Firebase Auth Token: " + mAccessToken.toString());
+        //Place holder for setting up the firebase code
+        mFirebase = new Firebase(GenericConstants.NEST_FIREBASE_URI);
+        mFirebase.auth(mAccessToken, new Firebase.AuthListener() {
+
+            @Override
+            public void onAuthError(FirebaseError firebaseError) {
+                Log.e(LOG_TAG,"Auth Error: " + firebaseError.getMessage());
+            }
+
+            @Override
+            public void onAuthSuccess(Object o) {
+                Log.e(LOG_TAG,"Auth Success: " + o.toString());
+            }
+
+            @Override
+            public void onAuthRevoked(FirebaseError firebaseError) {
+                Log.e(LOG_TAG,"Auth Revoked: " + firebaseError.getMessage());
+            }
+        });
+        mFirebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e(LOG_TAG,"Data Snapshot hit: " + dataSnapshot.getValue());
+
+                long child_count  = dataSnapshot.getChildrenCount();
+                Log.e(LOG_TAG,"Child Count: " + child_count);
+                for(DataSnapshot child: dataSnapshot.getChildren())
+                {
+                    Log.e(LOG_TAG,"Child Name: " + child.getName());
+                }
+                if(dataSnapshot.hasChild("structures"))
+                {
+                    Log.e(LOG_TAG,"Structures exist");
+                    Log.e(LOG_TAG,"Structures has children: " + dataSnapshot.child("structures").hasChildren());
+                    for (DataSnapshot child: dataSnapshot.child("structures").getChildren())
+                    {
+                        Log.e(LOG_TAG,"Child Value: " + child.getValue());
+                        NestStructure struct = child.getValue(NestStructure.class);
+                        struct.testObject();
+                    }
+
+                }else
+                {
+                    Log.e(LOG_TAG,"Structures do not exist");
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(LOG_TAG,"The read failed: " + firebaseError.getMessage());
+            }
+        });
+    }
+
 }

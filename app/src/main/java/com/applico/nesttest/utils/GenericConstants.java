@@ -10,6 +10,10 @@ import java.util.HashMap;
  */
 public class GenericConstants {
 
+    //TODO: I am going to need to re-evaluate the keys and where they are stored to integrate into our build process
+
+    //NewRelic API Key
+    public static final String NEW_RELIC_AUTH_TOKEN = "AA2e47f20482d30d260b06cd26d67bec780c956c6b";
     //Auth Path
     public static final String NEST_AUTH_PATH = "/oauth2/access_token";
     //API Endpoint for the development API
@@ -29,8 +33,8 @@ public class GenericConstants {
     //Shared Preferences
     public static final String NEST_SHARED_PREF_KEY = "nest_shared_pref";
     public static final String NEST_AUTH_CODE_KEY = "nest_auth_code_key";
-    public static final String NEST_AUTH_TOKEN = "nest_auth_token";
-    public static final String NEST_AUTH_TOKEN_EXPIRATION = "nest_seconds_to_expiration";
+    public static final String NEST_ACCESS_TOKEN = "nest_auth_token";
+    public static final String NEST_ACCESS_TOKEN_EXPIRATION = "nest_seconds_to_expiration";
      //Used globally throughout the application to make sure that its authorized
     public static final String NEST_IS_AUTH = "nest_is_auth";
 
