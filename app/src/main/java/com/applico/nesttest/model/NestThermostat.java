@@ -98,6 +98,185 @@ public class NestThermostat {
     @SerializedName("ambient_temperature_c")
     public String ambientTempC;
 
+    public NestThermostat()
+    {
+        deviceId = "";
+        locale = "";
+        version = "";
+        structureId = "";
+        name = "";
+        nameLong = "";
+        lastConnection = "";
+        isOnline = false;
+        canCool = false;
+        canHeat = false;
+        usingEmergencyHeat = false;
+        hasFan = false;
+        fanTimerActive = false;
+        fanTimerTimeout = "";
+        hasLeaf = false;
+        tempScale = "";
+        targetTempF = "";
+        targetTempC = "";
+        targetTempHighF = "";
+        targetTempHighC = "";
+        targetTempLowF = "";
+        targetTempLowC = "";
+        awayTempHighF = "";
+        awayTempHighC = "";
+        awayTempLowF = "";
+        awayTempLowC = "";
+        hvac_mode = "";
+        ambientTempF = "";
+        ambientTempC = "";
+    }
+
+
+    public String getDeviceId()
+    {
+        return deviceId;
+    }
+
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public String getVersion()
+    {
+        return version;
+    }
+
+    public String getStructureId()
+    {
+        return structureId;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getNameLong()
+    {
+        return nameLong;
+    }
+
+    public String getLastConnection()
+    {
+        return lastConnection;
+    }
+
+    public Boolean isOnline()
+    {
+        return isOnline;
+    }
+
+    public Boolean canCool()
+    {
+        return canCool;
+    }
+
+    public Boolean canHeat()
+    {
+        return canHeat;
+    }
+
+    public Boolean isUsingEmergencyHeat()
+    {
+        return usingEmergencyHeat;
+    }
+
+    public Boolean hasFan()
+    {
+        return hasFan;
+    }
+
+    public Boolean isFanTimerActive()
+    {
+        return fanTimerActive;
+    }
+
+    public String getFanTimerTimeout()
+    {
+        return fanTimerTimeout;
+    }
+
+    public Boolean hasLeaf()
+    {
+        return hasLeaf;
+    }
+
+    public String getTempScale()
+    {
+        return tempScale;
+    }
+
+    public String getTargetTempF()
+    {
+        return targetTempF;
+    }
+
+    public String getTargetTempC()
+    {
+        return targetTempC;
+    }
+
+    public String getTargetTempHighF()
+    {
+        return targetTempHighF;
+    }
+
+    public String getTargetTempHighC()
+    {
+        return targetTempHighC;
+    }
+
+    public String getTargetTempLowF()
+    {
+        return targetTempLowF;
+    }
+
+    public String getTargetTempLowC()
+    {
+        return targetTempLowC;
+    }
+
+    public String getAwayTempHighF()
+    {
+        return awayTempHighF;
+    }
+
+    public String getAwayTempHighC()
+    {
+        return awayTempHighC;
+    }
+
+    public String getAwayTempLowF()
+    {
+        return awayTempLowF;
+    }
+
+    public String getAwayTempLowC()
+    {
+        return awayTempLowC;
+    }
+
+    public String getHvac_mode()
+    {
+        return hvac_mode;
+    }
+
+    public String getAmbientTempF()
+    {
+        return ambientTempF;
+    }
+
+    public String getAmbientTempC()
+    {
+        return ambientTempC;
+    }
+
     /**
      * There are more elegant solutions to this, I know, but it does what I need
      */

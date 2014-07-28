@@ -2,50 +2,67 @@ package com.applico.nesttest.model;
 
 import android.util.Log;
 
-import com.google.gson.annotations.SerializedName;
+import com.shaded.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by matthewpowers on 7/25/14.
  * This is a smoke and carbon monoxide detector
  */
-public class NestSmokeCo {
+public class NestProtect {
     private static String LOG_TAG = NestThermostat.class.getSimpleName();
 
-    @SerializedName("device_id")
+    @JsonProperty("device_id")
     public String deviceId;
 
-    @SerializedName("locale")
+    @JsonProperty("locale")
     public String locale;
 
-    @SerializedName("software_version")
+    @JsonProperty("software_version")
     public String version;
 
-    @SerializedName("structure_id")
+    @JsonProperty("structure_id")
     public String structureId;
 
-    @SerializedName("name")
+    @JsonProperty("name")
     public String name;
 
-    @SerializedName("name")
+    @JsonProperty("name")
     public String nameLong;
 
-    @SerializedName("last_connection")
+    @JsonProperty("last_connection")
     public String lastConnection;
 
-    @SerializedName("is_online")
+    @JsonProperty("is_online")
     public Boolean isOnline;
 
-    @SerializedName("battery_health")
+    @JsonProperty("battery_health")
     public String batteryHealth;
 
-    @SerializedName("co_alarm_state")
+    @JsonProperty("co_alarm_state")
     public String coAlarmState;
 
-    @SerializedName("smoke_alarm_state")
+    @JsonProperty("smoke_alarm_state")
     public String smokeAlarmState;
 
-    @SerializedName("ui_color_state")
+    @JsonProperty("ui_color_state")
     public String uiColorState;
+
+    public NestProtect()
+    {
+        deviceId = "";
+        locale = "";
+        version = "";
+        structureId = "";
+        name = "";
+        nameLong = "";
+        lastConnection = "";
+        isOnline = false;
+        batteryHealth = "";
+        coAlarmState = "";
+        smokeAlarmState = "";
+        uiColorState = "";
+    }
+
 
     /**
      * There are more elegant solutions to this, I know, but it does what I need

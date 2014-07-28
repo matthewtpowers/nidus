@@ -63,6 +63,7 @@
     <orderEntry type="jdk" jdkName="Android API 20, L preview Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="firebase-client-jvm-LATEST" level="project" />
+    <orderEntry type="library" exported="" name="android-agent-3.419.0" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-21.0.0-rc1" level="project" />
