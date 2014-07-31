@@ -63,6 +63,66 @@ public class NestProtect {
         uiColorState = "";
     }
 
+    public String getDeviceId()
+    {
+        return deviceId;
+    }
+
+    public String getLocale()
+    {
+        return locale;
+    }
+
+    public String getVersion()
+    {
+        return version;
+    }
+
+    public String getStructureId()
+    {
+        return structureId;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getNameLong()
+    {
+        return nameLong;
+    }
+
+    public String getLastConnection()
+    {
+        return lastConnection;
+    }
+
+    public Boolean isOnline()
+    {
+        return isOnline;
+    }
+
+    public String getBatteryHealth()
+    {
+        return batteryHealth;
+    }
+
+    public String getCoAlarmState()
+    {
+        return coAlarmState;
+    }
+
+    public String getSmokeAlarmState()
+    {
+        return smokeAlarmState;
+    }
+
+    public String getUiColorState()
+    {
+        return uiColorState;
+    }
+
 
     /**
      * There are more elegant solutions to this, I know, but it does what I need

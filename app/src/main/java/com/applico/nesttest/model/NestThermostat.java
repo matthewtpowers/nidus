@@ -149,6 +149,7 @@ public class NestThermostat {
 
     public String getStructureId()
     {
+
         return structureId;
     }
 
