@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Database Strings, using database strings for CI/CD as opposed to Constants -->
+    <string name="database_name">nest_data.db</string>
+    <string name="database_version_a">1</string>
+
+</resources>
