@@ -20,7 +20,7 @@ public class NestDataContract {
      * These are the base device columns for all
      * nest devices(Protect and Thermostats
      */
-    public interface BaseDeviceColumns extends BaseColumns
+    public interface BaseNestDeviceColumns extends BaseColumns
     {
         /** The device ID associated with the device */
         public static final String COLUMN_DEVICE_ID = "device_id";
@@ -38,6 +38,8 @@ public class NestDataContract {
         public static final String COLUMN_LAST_CONNECTION = "last_connection";
         /** Online Status of the device */
         public static final String COLUMN_IS_ONLINE = "is_online";
+        /** Column Updated */
+        public static final String COLUMN_UPDATED = "updated";
 
     }
 
@@ -88,13 +90,14 @@ public class NestDataContract {
         /** Column Updated */
         public static final String COLUMN_UPDATED = "updated";
 
+
     }
 
 
     /**
      * Thermostats are self explanatory
      */
-    public interface ThermoColumns extends BaseColumns, BaseDeviceColumns
+    public interface ThermoColumns extends BaseColumns, BaseNestDeviceColumns
     {
         /** Cooling ability of the device */
         public static final String COLUMN_CAN_COOL = "can_cool";
@@ -123,7 +126,7 @@ public class NestDataContract {
         /** Min value for the temp */
         public static final String COLUMN_TARGET_TEMP_MIN_F = "target_temp_min_f";
         /** Min value for the temp */
-        public static final String COLUMN_TARGET_TEMP_Min_C = "target_temp_min_c";
+        public static final String COLUMN_TARGET_TEMP_MIN_C = "target_temp_min_c";
         /** Max value for the away temp */
         public static final String COLUMN_TARGET_AWAY_TEMP_MAX_F = "target_temp_away_high_f";
         /** Max value for the away temp */
@@ -133,7 +136,7 @@ public class NestDataContract {
         /** Min value for the away temp */
         public static final String COLUMN_TARGET_AWAY_TEMP_MIN_C = "target_temp_away_min_c";
         /** HVAC Mode - heat, cool, heat-cool, off */
-        public static final String COLUMN_HAVAC_MODE = "hvac_mode";
+        public static final String COLUMN_HVAC_MODE = "hvac_mode";
         /** Current temperature F */
         public static final String COLUMN_AMBIENT_TEMP_F = "ambient_temperature_f";
         /** Current temperature C*/
@@ -145,7 +148,7 @@ public class NestDataContract {
     /**
      * These are the columns for the CO & Smoke Detector (i.e. the Protect)
      */
-    public interface Protect extends BaseColumns, BaseDeviceColumns
+    public interface Protect extends BaseColumns, BaseNestDeviceColumns
     {
         /** esimtate of the remaining battery power */
         public static final String COLUMN_BATTERY_HEALTH = "battery_health";
@@ -155,8 +158,6 @@ public class NestDataContract {
         public static final String COLUMN_CO_SMOKE_STATE = "smoke_alarm_state";
         /** aggregate state of the two sensors: gray, green, yellow, red */
         public static final String COLUMN_UI_COLOR_STATE = "ui_color_state";
-        /** Column Updated */
-        public static final String COLUMN_UPDATED = "updated";
     }
 
     //TODO fill out the abstract classes

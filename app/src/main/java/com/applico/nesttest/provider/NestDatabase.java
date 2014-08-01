@@ -6,6 +6,8 @@ import android.content.Context;
 import com.applico.nesttest.R;
 import com.applico.nesttest.model.NestStructure;
 import com.applico.nesttest.provider.NestDataContract.StructuresColumns;
+import com.applico.nesttest.provider.NestDataContract.ETAColumns;
+import com.applico.nesttest.provider.NestDataContract.ThermoColumns;
 
 /**
  * Created by matthewpowers on 7/31/14.
@@ -46,17 +48,63 @@ public class NestDatabase extends SQLiteOpenHelper {
 
         /** Create the Structures Table */
         db.execSQL("CREATE_TABLE " + NestDatabaseTables.NEST_STRUCTURES + "("
-                + StructuresColumns.COLUMN_STRUCTURE_ID + " TEXT NOT NULL,"
-                + StructuresColumns.COLUMN_THERMOSTATS + " TEXT,"
-                + StructuresColumns.COLUMN_PROTECTS + " TEXT,"
-                + StructuresColumns.COLUMN_AWAY + " TEXT,"
-                + StructuresColumns.COLUMN_USER_DEFINED_NAME + " TEXT,"
-                + StructuresColumns.COLUMN_COUNTRY_CODE + ""
-                + StructuresColumns.COLUMN_NAME_PEAK_PERIOD_START_TIME + " Integer,"
-                + StructuresColumns.COLUMN_NAME_PEAK_PERIOD_END_TIME + " Integer,"
-                + StructuresColumns.COLUMN_TIME_ZONE + " TEXT,"
-                + StructuresColumns.COLUMN_UPDATED+ " INTEGER NOT NULL)"
+                        + StructuresColumns.COLUMN_STRUCTURE_ID + " TEXT NOT NULL,"
+                        + StructuresColumns.COLUMN_THERMOSTATS + " TEXT,"
+                        + StructuresColumns.COLUMN_PROTECTS + " TEXT,"
+                        + StructuresColumns.COLUMN_AWAY + " TEXT,"
+                        + StructuresColumns.COLUMN_USER_DEFINED_NAME + " TEXT,"
+                        + StructuresColumns.COLUMN_COUNTRY_CODE + ""
+                        + StructuresColumns.COLUMN_NAME_PEAK_PERIOD_START_TIME + " Integer,"
+                        + StructuresColumns.COLUMN_NAME_PEAK_PERIOD_END_TIME + " Integer,"
+                        + StructuresColumns.COLUMN_TIME_ZONE + " TEXT,"
+                        + StructuresColumns.COLUMN_UPDATED + " INTEGER NOT NULL)"
         );
+
+        /** Create the Estimated Time Arrival Table */
+        db.execSQL("CREATE_TABLE " + NestDatabaseTables.NEST_ETA + "("
+                        + ETAColumns.COLUMN_STRUCTURE_ID + " TEXT NOT NULL,"
+                        + ETAColumns.COLUMN_TRIP_ID + " TEXT NOT NULL,"
+                        + ETAColumns.COLUMN_ARRIVAL_START + " INTEGER NOT NULL,"
+                        + ETAColumns.COLUMN_ARRIVAL_END + " INTEGER NOT NULL,"
+                        + ETAColumns.COLUMN_UPDATED + " INTEGER NOT NULL)"
+        );
+
+        /** Create the Thermostats table */
+        db.execSQL("CREATE_TABLE " + NestDatabaseTables.NEST_THERMO + "("
+                        + ThermoColumns.COLUMN_DEVICE_ID + " TEXT NOT NULL, "
+                        + ThermoColumns.COLUMN_LOCALE + " TEXT NOT NULL, "
+                        + ThermoColumns.COLUMN_SOFTWARE_VERSION + " TEXT, "
+                        + ThermoColumns.COLUMN_STRUCTURE_ID + " INTEGER NOT NULL, "
+                        + ThermoColumns.COLUMN_NAME + " TEXT, "
+                        + ThermoColumns.COLUMN_LONG_NAME + " TEXT, "
+                        + ThermoColumns.COLUMN_SOFTWARE_VERSION + " TEXT, "
+                        + ThermoColumns.COLUMN_LAST_CONNECTION + " INTEGER, "
+                        + ThermoColumns.COLUMN_IS_ONLINE + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_CAN_COOL + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_CAN_HEAT + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_EMERGENCY_HEAT + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_HAS_FAN + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_FAN_TIMER_ACTIVE + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_FAN_TIMER_TIMEOUT + " INTEGER, "
+                        + ThermoColumns.COLUMN_HAS_LEAF + " BOOLEAN, "
+                        + ThermoColumns.COLUMN_TEMP_SCALE + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_F + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_C + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_MAX_F + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_MAX_C + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_MIN_F + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_TEMP_MIN_C + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_AWAY_TEMP_MAX_F + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_AWAY_TEMP_MAX_C + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_AWAY_TEMP_MIN_F + " TEXT, "
+                        + ThermoColumns.COLUMN_TARGET_AWAY_TEMP_MIN_C + " TEXT, "
+                        + ThermoColumns.COLUMN_HVAC_MODE + " TEXT, "
+                        + ThermoColumns.COLUMN_AMBIENT_TEMP_F + " TEXT, "
+                        + ThermoColumns.COLUMN_AMBIENT_TEMP_C + " TEXT, "
+                        + ThermoColumns.COLUMN_UPDATED + " INTEGER NOT NULL)"
+        );
+
+
     }
 
     @Override
