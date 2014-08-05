@@ -17,12 +17,14 @@ import java.util.Map;
 import java.util.Iterator;
 
 import com.applico.nesttest.model.NestStructure;
+import com.applico.nesttest.model.NestThermostat;
 import com.applico.nesttest.ui.NestAuthFragment;
 import com.applico.nesttest.ui.NestDeviceFragment;
 import com.applico.nesttest.ui.ThermostatFragment;
 import com.applico.nesttest.utils.GenericConstants;
 import com.applico.nesttest.model.INestService;
 import com.applico.nesttest.model.NestToken;
+import com.applico.nesttest.model.NestProtect;
 
 import com.firebase.client.*;
 
@@ -277,6 +279,8 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
                 {
                     Log.e(LOG_TAG,"Child Name: " + child.getName());
                 }
+
+                //Test Structures
                 if(dataSnapshot.hasChild("structures"))
                 {
                     Log.e(LOG_TAG,"Structures exist");
@@ -285,13 +289,45 @@ public class NestDriverActivity extends Activity implements Firebase.AuthListene
                     {
                         Log.e(LOG_TAG,"Child Value: " + child.getValue());
                         NestStructure struct = child.getValue(NestStructure.class);
+
+                        //These the structures object
                         struct.testObject();
                     }
 
-                }else
-                {
-                    Log.e(LOG_TAG,"Structures do not exist");
                 }
+                if (dataSnapshot.hasChild("devices/thermostats"))
+                {
+                    Log.e(LOG_TAG,"Has Thermostats");
+                    for (DataSnapshot child: dataSnapshot.child("devices/thermostats").getChildren())
+                    {
+                        Log.e(LOG_TAG,"Thermo Child Value: " + child.getValue());
+                        NestThermostat thermo = child.getValue(NestThermostat.class);
+                        thermo.testObject();
+
+
+                    }
+
+                }
+                else
+                {
+                    Log.e(LOG_TAG,"No Thermostats");
+                }
+                if (dataSnapshot.hasChild("devices/smoke_co_alarms"))
+                {
+                    Log.e(LOG_TAG,"Has smoke co2");
+                    for (DataSnapshot child: dataSnapshot.child("devices/smoke_co_alarms").getChildren())
+                    {
+                        Log.e(LOG_TAG,"Smoke Child Value: " + child.getValue());
+                        NestProtect protect = child.getValue(NestProtect.class);
+                        protect.testObject();
+                    }
+                }
+                else
+                {
+                    Log.e(LOG_TAG,"No co2");
+                }
+
+
             }
 
             @Override

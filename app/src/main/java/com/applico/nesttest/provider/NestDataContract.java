@@ -1,5 +1,6 @@
 package com.applico.nesttest.provider;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -15,6 +16,15 @@ import android.provider.BaseColumns;
  * 4) Elevated Event History - this is a history associated with "elevated events
  */
 public class NestDataContract {
+
+    public static final String CONTENT_AUTHORITY = "com.applico.nesttest";
+    public static final Uri BASE_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    //These are the URIs substrings for each datasource (table)
+    private static final String PATH_PROTECT = "protect";
+    private static final String PATH_THERMO = "thermo";
+    private static final String PATH_STRUCTURE = "structure";
+    private static final String PATH_ETA = "eta";
 
     /**
      * These are the base device columns for all
@@ -148,7 +158,7 @@ public class NestDataContract {
     /**
      * These are the columns for the CO & Smoke Detector (i.e. the Protect)
      */
-    public interface Protect extends BaseColumns, BaseNestDeviceColumns
+    public interface ProtectColumns extends BaseColumns, BaseNestDeviceColumns
     {
         /** esimtate of the remaining battery power */
         public static final String COLUMN_BATTERY_HEALTH = "battery_health";
@@ -164,8 +174,12 @@ public class NestDataContract {
     /**
      * Structures are Nest "locations"
      */
-    public abstract class Structures implements StructuresColumns
+    public static abstract class Structures implements StructuresColumns
     {
+        //Database table name
+        public static final String NEST_STRUCTURES = "nest_structures";
+        public static final Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_STRUCTURE)
+                .build();
 
     }
 
@@ -174,7 +188,30 @@ public class NestDataContract {
      * Estimated time arrival is a component of every home
      */
     public static abstract class ETA {
+        //Database table name
+        public static final String NEST_ETA = "nest_eta";
+        public static final Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_ETA).build();
 
+    }
+
+    /**
+     *
+     */
+    public static abstract class Thermostats implements ThermoColumns
+    {
+        //Database table name
+        public static final String NEST_THERMO = "nest_thermo";
+        public static final Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_THERMO).build();
+    }
+
+    /**
+     *
+     */
+    public static abstract class Protect implements ProtectColumns
+    {
+        //Database table name
+        public static final String NEST_PROTECT = "nest_protect";
+        public static final Uri CONTENT_URI = BASE_URI.buildUpon().appendPath(PATH_PROTECT).build();
     }
 
 
