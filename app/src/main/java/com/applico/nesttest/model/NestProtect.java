@@ -26,7 +26,7 @@ public class NestProtect {
     @JsonProperty("name")
     public String name;
 
-    @JsonProperty("name")
+    @JsonProperty("name_long")
     public String nameLong;
 
     @JsonProperty("last_connection")

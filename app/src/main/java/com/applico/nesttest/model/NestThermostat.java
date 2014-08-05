@@ -1,6 +1,8 @@
 package com.applico.nesttest.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.shaded.fasterxml.jackson.annotation.JsonProperty;
+
 import android.util.Log;
 
 /**
@@ -10,92 +12,93 @@ import android.util.Log;
 public class NestThermostat {
 
     private static String LOG_TAG = NestThermostat.class.getSimpleName();
+    //TODO an enumaration for some of the values starting with hvac_mode
 
-    @SerializedName("device_id")
+    @JsonProperty("device_id")
     public String deviceId;
 
-    @SerializedName("locale")
+    @JsonProperty("locale")
     public String locale;
 
-    @SerializedName("software_version")
+    @JsonProperty("software_version")
     public String version;
 
-    @SerializedName("structure_id")
+    @JsonProperty("structure_id")
     public String structureId;
 
-    @SerializedName("name")
+    @JsonProperty("name")
     public String name;
 
-    @SerializedName("name")
+    @JsonProperty("name_long")
     public String nameLong;
 
-    @SerializedName("last_connection")
+    @JsonProperty("last_connection")
     public String lastConnection;
 
-    @SerializedName("is_online")
-    public Boolean isOnline;
+    @JsonProperty("is_online")
+    public boolean isOnline;
 
-    @SerializedName("can_cool")
-    public Boolean canCool;
+    @JsonProperty("can_cool")
+    public boolean canCool;
 
-    @SerializedName("can_heat")
-    public Boolean canHeat;
+    @JsonProperty("can_heat")
+    public boolean canHeat;
 
-    @SerializedName("is_using_emergency_heat")
-    public Boolean usingEmergencyHeat;
+    @JsonProperty("is_using_emergency_heat")
+    public boolean usingEmergencyHeat;
 
-    @SerializedName("has_fan")
-    public Boolean hasFan;
+    @JsonProperty("has_fan")
+    public boolean hasFan;
 
-    @SerializedName("fan_timer_active")
-    public Boolean fanTimerActive;
+    @JsonProperty("fan_timer_active")
+    public boolean fanTimerActive;
 
-    @SerializedName("fan_timer_timeout")
+    @JsonProperty("fan_timer_timeout")
     public String fanTimerTimeout;
 
-    @SerializedName("has_leaf")
-    public Boolean hasLeaf;
+    @JsonProperty("has_leaf")
+    public boolean hasLeaf;
 
-    @SerializedName("temperature_scale")
+    @JsonProperty("temperature_scale")
     public String tempScale;
 
-    @SerializedName("target_temperature_f")
-    public String targetTempF;
+    @JsonProperty("target_temperature_f")
+    public int targetTempF;
 
-    @SerializedName("target_temperature_c")
-    public String targetTempC;
+    @JsonProperty("target_temperature_c")
+    public float targetTempC;
 
-    @SerializedName("target_temperature_high_f")
-    public String targetTempHighF;
+    @JsonProperty("target_temperature_high_f")
+    public int targetTempHighF;
 
-    @SerializedName("target_temperature_high_c")
-    public String targetTempHighC;
+    @JsonProperty("target_temperature_high_c")
+    public float targetTempHighC;
 
-    @SerializedName("target_temperature_low_f")
-    public String targetTempLowF;
+    @JsonProperty("target_temperature_low_f")
+    public int targetTempLowF;
 
-    @SerializedName("target_temperature_low_c")
-    public String targetTempLowC;
+    @JsonProperty("target_temperature_low_c")
+    public float targetTempLowC;
 
-    @SerializedName("away_temperature_high_f")
-    public String awayTempHighF;
+    @JsonProperty("away_temperature_high_f")
+    public int awayTempHighF;
 
-    @SerializedName("away_temperature_high_c")
-    public String awayTempHighC;
+    @JsonProperty("away_temperature_high_c")
+    public float awayTempHighC;
 
-    @SerializedName("away_temperature_low_f")
-    public String awayTempLowF;
+    @JsonProperty("away_temperature_low_f")
+    public int awayTempLowF;
 
-    @SerializedName("away_temperature_low_c")
-    public String awayTempLowC;
+    @JsonProperty("away_temperature_low_c")
+    public float awayTempLowC;
 
-    @SerializedName("hvac_mode")
+    @JsonProperty("hvac_mode")
     public String hvac_mode;
 
-    @SerializedName("ambient_temperature_f")
+    @JsonProperty("ambient_temperature_f")
     public String ambientTempF;
 
-    @SerializedName("ambient_temperature_c")
+    @JsonProperty("ambient_temperature_c")
     public String ambientTempC;
 
     public NestThermostat()
@@ -116,16 +119,16 @@ public class NestThermostat {
         fanTimerTimeout = "";
         hasLeaf = false;
         tempScale = "";
-        targetTempF = "";
-        targetTempC = "";
-        targetTempHighF = "";
-        targetTempHighC = "";
-        targetTempLowF = "";
-        targetTempLowC = "";
-        awayTempHighF = "";
-        awayTempHighC = "";
-        awayTempLowF = "";
-        awayTempLowC = "";
+        targetTempF = 0;
+        targetTempC = 0;
+        targetTempHighF = 0;
+        targetTempHighC = 0;
+        targetTempLowF = 0;
+        targetTempLowC = 0;
+        awayTempHighF = 0;
+        awayTempHighC = 0;
+        awayTempLowF = 0;
+        awayTempLowC = 0;
         hvac_mode = "";
         ambientTempF = "";
         ambientTempC = "";
@@ -213,52 +216,52 @@ public class NestThermostat {
         return tempScale;
     }
 
-    public String getTargetTempF()
+    public int getTargetTempF()
     {
         return targetTempF;
     }
 
-    public String getTargetTempC()
+    public float getTargetTempC()
     {
         return targetTempC;
     }
 
-    public String getTargetTempHighF()
+    public int getTargetTempHighF()
     {
         return targetTempHighF;
     }
 
-    public String getTargetTempHighC()
+    public float getTargetTempHighC()
     {
         return targetTempHighC;
     }
 
-    public String getTargetTempLowF()
+    public int getTargetTempLowF()
     {
         return targetTempLowF;
     }
 
-    public String getTargetTempLowC()
+    public float getTargetTempLowC()
     {
         return targetTempLowC;
     }
 
-    public String getAwayTempHighF()
+    public int getAwayTempHighF()
     {
         return awayTempHighF;
     }
 
-    public String getAwayTempHighC()
+    public float getAwayTempHighC()
     {
         return awayTempHighC;
     }
 
-    public String getAwayTempLowF()
+    public int getAwayTempLowF()
     {
         return awayTempLowF;
     }
 
-    public String getAwayTempLowC()
+    public float getAwayTempLowC()
     {
         return awayTempLowC;
     }

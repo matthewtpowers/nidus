@@ -24,6 +24,12 @@
             android:name=".DeviceDetailsActivity"
             android:label="@string/title_activity_device_details" >
         </activity>
+
+        <provider android:name=".provider.NestProvider"
+                  android:authorities="com.applico.nesttest"
+                  android:syncable="false"
+                  android:exported="false"
+                  />
     </application>
 
 </manifest>
